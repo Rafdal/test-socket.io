@@ -22,6 +22,7 @@ message.addEventListener('keypress', function() {
     socket.emit('chat:escribiendo', username.value);
 });
 
+// En evento chat mensaje
 socket.on('chat:mensaje', function(data) { 
     actions.innerHTML = ''
     output.innerHTML += `<p>
