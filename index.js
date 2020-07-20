@@ -3,7 +3,10 @@
 
 // Para bajar las deps ejecutar solo // $ npm install
 
+// @ts-check
+
 console.log("Hey What's up freshgang?");
+
 
 const express = require('express');
 const path = require('path')
@@ -29,7 +32,9 @@ const io = SocketIO(server);
 
 // WebSockets
 io.on('connection', (socket) => {
-    console.log('new connection', socket.id);
+
+    console.log('new connection', socket.client.request.headers['user-agent']);
+    
 
     socket.on('chat:mensaje', (data) => {
         console.log('received:',data);
@@ -54,6 +59,13 @@ io.on('connection', (socket) => {
         // Con este metodo solo le envio los datos
         // Al resto de sockets y no al remitente
         socket.broadcast.emit('chat:escribiendo', data);
+    });
+
+    // Intermediario
+    // ! TODO: Implementar direccionamiento
+    socket.on('module:control', (data) => {
+        
+        socket.broadcast.emit('module:control', data);
     });
     
 });
