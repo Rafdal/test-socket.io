@@ -6,6 +6,7 @@ const socket = io(); // Solo funciona asi si lo despliego en el mismo dominio, c
 let message = document.getElementById('message');
 let username = document.getElementById('username');
 let btn = document.getElementById('send');
+let btnControl = document.getElementById('control');
 let output = document.getElementById('output');
 let actions = document.getElementById('actions');
 
@@ -16,6 +17,10 @@ btn.addEventListener('click', function(){
     }
     socket.emit('chat:mensaje', msg);
     message.value = ''; // Borro el textBox del body mensaje
+});
+
+btnControl.addEventListener('click', function(){
+    socket.emit('module:control');
 });
 
 message.addEventListener('keypress', function() {

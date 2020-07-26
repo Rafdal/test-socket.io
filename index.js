@@ -32,10 +32,8 @@ const io = SocketIO(server);
 
 // WebSockets
 io.on('connection', (socket) => {
-
-    console.log('new connection', socket.client.request.headers['user-agent']);
+    console.log('new connection', socket.client.id, socket.client.request.headers['user-agent']);
     
-
     socket.on('chat:mensaje', (data) => {
         console.log('received:',data);
 
@@ -62,10 +60,10 @@ io.on('connection', (socket) => {
     });
 
     // Intermediario
-    // ! TODO: Implementar direccionamiento
+    // ! TODO: Implementar direccionamiento (?)
+    // @ TODO: Llevar un seguimiento de clientes en el momento de que se conectan y desconectan, e identificarlos
     socket.on('module:control', (data) => {
         
         socket.broadcast.emit('module:control', data);
     });
-    
 });
