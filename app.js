@@ -81,13 +81,16 @@ io.on('connection', (socket) => {
 
 
     socket.on('module:connect', (data) => {
+        console.log('[MODULE:CONNECT]',data);
+        
         try {
             var obj = JSON.parse(data);
-
+            console.log(obj.mac);
+            
             // % IMPLEMENTACION HARDCODEADA TEMPORAL PARA DIRECCIONAMIENTO            
-            if (obj.user === "Rafa", obj.hardId === "E32-2594-V806F") 
-                socketClientID = socket.id;
-            console.log('[New module] ID:', socketClientID, obj);
+            // if (obj.user === "Rafa", obj.hardId === "E32-2594-V806F") 
+                // socketClientID = socket.id;
+            // console.log('[New module] ID:', socketClientID, obj);
         } catch (error) {
             console.error('[Error]', error);
         }
@@ -113,5 +116,12 @@ io.on('connection', (socket) => {
             console.error('[Error]', error);
         }        
     });
+
+
+
+    /* socket.on('json:test', (data) => {
+        
+             
+    }); */
     
 });
