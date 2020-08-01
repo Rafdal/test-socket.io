@@ -81,16 +81,16 @@ io.on('connection', (socket) => {
 
 
     socket.on('module:connect', (data) => {
-        console.log('[MODULE:CONNECT]',data);
-        
+    
+        console.log('[MODULE:CONNECT]');    
         try {
             var obj = JSON.parse(data);
-            console.log(obj.mac);
+            // console.log(obj);
             
             // % IMPLEMENTACION HARDCODEADA TEMPORAL PARA DIRECCIONAMIENTO            
-            // if (obj.user === "Rafa", obj.hardId === "E32-2594-V806F") 
-                // socketClientID = socket.id;
-            // console.log('[New module] ID:', socketClientID, obj);
+            if (obj.user == "Rafa", obj.mac == "3C:71:BF:FF:76:3C") 
+                socketClientID = socket.id;
+            console.log('[New module] ID:', socketClientID, obj.mac, obj.user, obj.sdk);
         } catch (error) {
             console.error('[Error]', error);
         }
@@ -111,7 +111,7 @@ io.on('connection', (socket) => {
             if (socketClientID != null) // % IMPLEMENTACION HARDCODEADA TEMPORAL PARA DIRECCIONAMIENTO
                 io.sockets.connected[socketClientID].emit('module:control', obj.packet);
             else
-                console.error('Socket OFFLINE');
+                console.error('[Error]: ESP32 is OFFLINE');
         } catch (error) {
             console.error('[Error]', error);
         }        
